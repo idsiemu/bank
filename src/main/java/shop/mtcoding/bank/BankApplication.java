@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
-@EnableJpaAuditing
+@EnableJpaAuditing // @CreatedDate, @LastModifiedDate 작동시키기 위해 필요함
 @SpringBootApplication
 public class BankApplication {
 
