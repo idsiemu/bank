@@ -1,10 +1,12 @@
 package shop.mtcoding.bank.config;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -14,7 +16,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import shop.mtcoding.bank.domain.users.UserEnum;
+import shop.mtcoding.bank.dto.ErrorResponseDto;
+import shop.mtcoding.bank.utils.ResponseUtils;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 @Configuration
@@ -37,6 +43,10 @@ public class SecurityConfig {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // SessionId를 서버에서 관리 안하겠다.
         http.formLogin().disable(); // 로그인 폼 막음
         http.httpBasic().disable(); // 팝업창으로 인정처리되는 기능 막음
+        http.exceptionHandling().authenticationEntryPoint((request, response, authenticationException) -> {
+            ErrorResponseDto<?> responseDto = new ErrorResponseDto<>("100-001", "인증오류", null);
+            ResponseUtils.errorException(response, 401, responseDto);
+        });
         http.authorizeHttpRequests()
                 .antMatchers("/api/auth/**").authenticated()
                 .antMatchers("/api/admin/**").hasRole(UserEnum.ADMIN.getValue())
