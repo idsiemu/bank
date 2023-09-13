@@ -35,9 +35,11 @@ public class Transactions {
     @Column(nullable = false)
     private long amount;
 
+    @Column(name = "withdraw_account_balance")
     private long withdrawAccountBalance;
-    private long depositAccountBalance;
 
+    @Column(name = "deposit_account_balance")
+    private long depositAccountBalance;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -48,11 +50,11 @@ public class Transactions {
     private String tel;
 
     @CreatedDate
-    @Column(nullable = false)
+    @Column(nullable = false, name = "created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(nullable = false)
+    @Column(nullable = false, name = "updated_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime updatedAt;
 
     @Builder

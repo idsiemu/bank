@@ -39,11 +39,11 @@ public class Users {
     private UserEnum role;
 
     @CreatedDate
-    @Column(nullable = false, name = "created_at")
+    @Column(nullable = false, name = "created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(nullable = false, name = "updated_at")
+    @Column(nullable = false, name = "updated_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime updatedAt;
 
     @Builder
