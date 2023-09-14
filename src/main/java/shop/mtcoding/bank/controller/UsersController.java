@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import shop.mtcoding.bank.dto.users.SignUpRequestDto;
 import shop.mtcoding.bank.dto.users.SignUpResponseDto;
-import shop.mtcoding.bank.handler.ApiException;
 import shop.mtcoding.bank.service.UsersService;
 
 import javax.validation.Valid;
@@ -23,9 +22,6 @@ public class UsersController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signUp(@RequestBody @Valid SignUpRequestDto signUpRequestDto, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
-            throw new ApiException("500-002");
-        }
         SignUpResponseDto responseDto = usersService.signUp(signUpRequestDto);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }

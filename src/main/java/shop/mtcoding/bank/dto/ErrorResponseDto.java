@@ -9,7 +9,7 @@ import lombok.*;
 public class ErrorResponseDto<T> {
     // 응답이라 수정할일 없어 final로 선언함
     private String code = "000";
-    private String message = "";
+    private String message = "HAS ERR";
     private T data;
 
 }

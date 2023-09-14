@@ -17,6 +17,7 @@ public class GlobalException {
     @ExceptionHandler(ApiException.class)
     public ResponseEntity<?> apiException(ApiException apiException) {
         ErrorResponseDto systemErrorDto = new ErrorResponseDto();
+        systemErrorDto.setData(apiException.getData());
         systemErrorsRepository.findById(apiException.getCode())
                 .ifPresent(error -> {
                     systemErrorDto.setCode(error.getCode());

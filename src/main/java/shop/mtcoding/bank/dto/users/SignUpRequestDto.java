@@ -7,10 +7,12 @@ import shop.mtcoding.bank.domain.users.UserEnum;
 import shop.mtcoding.bank.domain.users.Users;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
 public class SignUpRequestDto {
+    @Pattern(regexp = "", message = "영문/숫자 8~20자로 해주세여")
     @NotEmpty
     private String username;
     @NotEmpty

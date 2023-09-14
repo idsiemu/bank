@@ -1,4 +1,4 @@
-package shop.mtcoding.bank.controller;
+package shop.mtcoding.bank.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
